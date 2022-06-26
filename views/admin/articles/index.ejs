@@ -1,0 +1,57 @@
+<%- include ('../../partials/header.ejs')%>
+<%- include ('../../partials/navbar.ejs')%>
+
+<div class="container">
+    <hr>
+    <h2>Artigos</h2>
+    <a class="btn btn-success" href="/admin/articles/new">Criar novo artigo</a>
+    <hr>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Slug</th>
+                <th>Categoria</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% a.forEach(
+                a=>
+                {%>
+                    <tr>
+                        <th><%=a.id%></th>
+                        <th><%=a.title%></th>
+                        <th><%=a.slug%></th>
+                        <th><%=a.category.title%></th>
+                        <th>
+                            
+                            <form style="display: inline;" method="post" action="/articles/delete" onsubmit="deleteCheck(event,this)"> 
+                                <input type="hidden" name="id" value="<%=a.id%>">
+                                <button type="submit" class="btn btn-danger">Deletar</button>
+                            </form>
+                        </th>    
+                    </tr>                
+                <%}) 
+            %>            
+        </tbody>
+    </table>
+</div>
+
+<%- include ('../../partials/footer.ejs')%>
+
+<script>
+    function deleteCheck(event,form){
+
+        event.preventDefault()
+        let confirmaton=confirm('Deseja excluir este Artigo')
+        if(confirmaton){
+            console.log('deletar sim')
+            form.submit()
+        }else{
+            console.log('deletar não')
+        }
+
+    }
+</script>

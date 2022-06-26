@@ -1,0 +1,56 @@
+<%- include ('../../partials/header.ejs')%>
+<%- include ('../../partials/navbar.ejs')%>
+
+<body>
+<h2>Bem vindo isso é um teste</h2>
+
+<div class="container">
+
+    <hr>
+
+    <div class="card">
+        
+        <div class="card-header">
+            <h2>Editar Artigo</h2>  
+        </div>
+        
+        <div class="card-body">
+            <form method="post" action="/articles/update">
+                <input type="hidden" value="<%=a.id%>" name="id">
+                <input class="form-control form-item" style="margin-bottom: 20px" type="text" name="title" placeholder="defina o titulo do artigo" value="<%=a.title%>">
+                <textarea id="my-expressjs-tinymce-app" class="form-control form-item" placeholder="escreva o artigo aqui" name="body"><%=a.body%></textarea>
+                <label class="form-item">Categoria</label>
+                <select name="category" class="form-control form-item">
+                    <%
+                        categories.forEach(
+                        c=>{%>
+                            <%if(c.id==a.categoryId){%>
+                                <option value="<%=c.id%>" selected>
+                                    <%=c.title%>
+                                </option>                                
+                            <%}
+                            else
+                            {%>
+                                <option value="<%=c.id%>" >
+                                    <%=c.title%>
+                                </option>  
+                            <%}
+                            %>                            
+
+                        <%})
+                    
+                    %>
+
+
+                </select>
+                <button type="submit" class="btn btn-success form-item">Atualizar</button>
+            </form>
+
+        </div>
+    </div>
+</div>
+</body>
+<%- include ('../../partials/footer.ejs')%>
+<script type="application/javascript" src= "/tinymce/tinymce.min.js"></script>
+
+<script type="application/javascript" src= "/javascripts/my-tinymce-config.js"></script>

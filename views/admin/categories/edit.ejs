@@ -1,0 +1,43 @@
+<%- include ('../../partials/header.ejs')%>
+<%- include ('../../partials/navbar.ejs')%>
+
+<body>
+<h2>Bem vindo isso é um teste</h2>
+
+<div class="container">
+
+    <hr>
+
+    <div class="card">
+        
+        <div class="card-header">
+            <h2>Edição de Categoria</h2>  
+        </div>
+        
+        <div class="card-body">
+            <form method="post" action="/categories/update" style="display: inline;" onsubmit="updateCheck(event,this)">
+                <input class="form-control form-item" type="text" name="title"
+                value="<%=category.title%>" placeholder="defina o titulo da categoria">
+                <input type="hidden" name="id" value="<%=category.id%>">
+                <button type="submit" class="btn btn-success form-item">Atualizar</button>
+            </form>
+
+        </div>
+    </div>
+</div>
+</body>
+<%- include ('../../partials/footer.ejs')%>
+<script>
+    function updateCheck(event,form){
+
+        event.preventDefault()
+        let confirmaton=confirm('Deseja atualizar esta Categoria')
+        if(confirmaton){
+            console.log('atualizar sim')
+            form.submit()
+        }else{
+            console.log('atualizar não')
+        }
+
+    }
+</script>
